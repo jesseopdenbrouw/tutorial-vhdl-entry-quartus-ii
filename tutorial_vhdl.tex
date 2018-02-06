@@ -317,6 +317,7 @@ morecomment=[l]\# % <= this one ! Much simpler
   	\vhEntry{1.6}{20-04-2015}{JodB}{replaced 'de naam van de testbench' with 'de naam van het commandobestand' \newline uniformly use of 'commandobestand'}
   	\vhEntry{1.7}{02-06-2015}{JodB}{added ``instance not bound'' tips and tricks... \newline changed HHS logo to PDF version}
   	\vhEntry{1.8}{23-03-2016}{JodB}{added commands to delete \lstinline|db|, \lstinline|incremental_db|, \lstinline|simulation| and \lstinline|output_files| to the remove-script\newline reordered some sections in Tips \& Tricks\newline modified block diagram DE0 Board}
+  	\vhEntry{1.81}{05-02-2018}{JodB}{changed modelsim executable path}
 \end{versionhistory}
 
 
@@ -1699,11 +1700,10 @@ Ga als volgt te werk:
 \item Open in de Project manager het menu \menu{Tools\pijl{}Options}
 \item In het venster dat geopend wordt kies je \menu{EDA Tool Options}
 \item Aan de rechterkant kan je in het veld \naam{ModelSim-Altera} het pad opgeven.
-\item Voor de PC's op school is dat \lstinline|C:\altera\11.1\modelsim_ae\win32aloem|
+\item Voor de PC's op school is dat \lstinline|C:\altera\13.0sp1\modelsim_ase\win32aloem|
 \end{itemize}
 
-Op je eigen PC hangt dat af van het installatie-pad. Bij gebruik van de Web
-Edition moet je \naam{modelsim\_ae} vervangen voor \naam{modelsim\_ase}. Zie
+Op je eigen PC of laptop hangt dat af van het installatie-pad. Zie
 figuur~\ref{fig:212modelsimpath2}.
 
 Tip: bij gebruik van Quartus v13.1 moet je een \lstinline|\| (''backslash'')
