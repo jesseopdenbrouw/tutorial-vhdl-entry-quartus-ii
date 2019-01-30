@@ -1,3 +1,6 @@
+% !TeX TS-program = xelatex
+
+
 %%
 %% TutQuartusVHDL - VHDL Tutorial Using Quartus And ModelSim
 %%
@@ -58,10 +61,6 @@
 \usepackage{array}
 \setlength{\mathindent}{1em}
 
-%% PDF Version and compression...
-\pdfminorversion=5
-\pdfobjcompresslevel=2
-
 %% Dutch spelling of chapter, section, etc.
 \usepackage[dutch]{babel}
 
@@ -94,11 +93,30 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 
+\usepackage{ifluatex,ifxetex}
+%% PDF Version and compression...
+\ifluatex
+\usepackage{fontspec}
+\setmainfont{Calibri}
+\setmonofont[Scale=0.95]{Consolas}
+\else
+\ifxetex
+\usepackage{fontspec}
+\setmainfont{Calibri}
+\setmonofont[Scale=0.95]{Consolas}
+\else
+\pdfminorversion=5
+\pdfobjcompresslevel=2
 %% The L Modern Font
 %\usepackage{lmodern}
 %% Sort of Times New Roman
 \usepackage[charter]{mathdesign}
 %\usepackage{mathptmx}
+%\usepackage[scaled=0.90]{inconsolata}
+\usepackage[scaled=0.80]{beramono}
+\fi
+\fi
+
 \usepackage{textcomp} 
 
 %% Set paragraph skips et al.
@@ -124,15 +142,13 @@
 
 %% Use computer code listings
 \usepackage{listings}
-%\usepackage[scaled=0.90]{inconsolata}
-\usepackage[scaled=0.80]{beramono}
 
 %% Change the way chapters and sections are formatted.
 \usepackage{titlesec}
 \titleformat{\chapter}[hang] 
-{\fontfamily{phv}\selectfont\Huge\bfseries\scshape}{\thechapter.}{0.5em}{}
-\titleformat{\section}{\fontfamily{phv}\selectfont\large\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}{\fontfamily{phv}\selectfont\bfseries}{\thesubsection}{1em}{}
+{\usefont{T1}{phv}{m}{n}\selectfont\Huge\bfseries\scshape}{\thechapter.}{0.5em}{}
+\titleformat{\section}{\usefont{T1}{phv}{m}{n}\selectfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\usefont{T1}{phv}{m}{n}\selectfont\bfseries}{\thesubsection}{1em}{}
 \titlespacing*{\chapter}{0pt}{25pt}{15pt}
 %\titlespacing*{\section}{0pt}{17pt}{3pt}
 \titlespacing*{\section}{0pt}{1.44\baselineskip}{0.255\baselineskip}
@@ -200,7 +216,7 @@
   \thispagestyle{empty}%
   \vfill
   \begin{center}\leavevmode
-    {\fontfamily{phv}\fontsize{35pt}{60pt}\selectfont\bfseries\scshape \@title\par}%
+    {\usefont{T1}{phv}{m}{n}\fontsize{35pt}{60pt}\selectfont\bfseries\scshape \@title\par}%
     \vskip 8.0cm
     \begin{minipage}[c]{.50\linewidth}
        \includegraphics[width=\linewidth]{HHS_NL_groen_FC}
@@ -308,17 +324,17 @@ morecomment=[l]\# % <= this one ! Much simpler
 %%
 %% Version history and contact info
 \begin{versionhistory}
-  	\vhEntry{1.0}{16-02-2014}{JodB}{initial \LaTeX version Word 2003 v013}
+  	\vhEntry{1.0}{16-02-2014}{JodB}{initial \LaTeX{} version Word 2003 v013}
   	\vhEntry{1.1}{19-02-2014}{JodB}{small updates}
   	\vhEntry{1.2}{17-05-2014}{JodB}{v014) added Chap 5, minor fixed}
   	\vhEntry{1.3}{00-00-0000}{JodB}{Not published}
   	\vhEntry{1.4}{17-07-2014}{JodB}{consistent numbering version/filename\newline changed filename \lstinline|xxxchip.png| \& \lstinline|xxxlayout7seg.png| for consistency with INLDIG tutorial}
-  	\vhEntry{1.5}{12-02-2015}{JodB}{changed layout to that of schematic entry tutorial \newline removed line numbers from \lstinline|tb_*.vhd| and \lstinline|tb__*.do| \newline moved comment about concatenation of \lstinline|PIN_|}
+  	\vhEntry{1.5}{12-02-2015}{JodB}{changed layout to that of schematic entry tutorial \newline removed line numbers from \lstinline|tb_*.vhd| and \lstinline|tb_*.do| \newline moved comment about concatenation of \lstinline|PIN_|}
   	\vhEntry{1.6}{20-04-2015}{JodB}{replaced 'de naam van de testbench' with 'de naam van het commandobestand' \newline uniformly use of 'commandobestand'}
   	\vhEntry{1.7}{02-06-2015}{JodB}{added ``instance not bound'' tips and tricks... \newline changed HHS logo to PDF version}
   	\vhEntry{1.8}{23-03-2016}{JodB}{added commands to delete \lstinline|db|, \lstinline|incremental_db|, \lstinline|simulation| and \lstinline|output_files| to the remove-script\newline reordered some sections in Tips \& Tricks\newline modified block diagram DE0 Board}
   	\vhEntry{1.81}{05-02-2018}{JodB}{changed modelsim executable path}
-	\vhEntry{1.82}{30-01-2019}{JodB}{changed logo, parskip set to v1}
+	\vhEntry{1.82}{30-01-2019}{JodB}{changed logo, parskip set to v1, added support for lua and xe, typos and minor changes}
 \end{versionhistory}
 
 
@@ -1826,9 +1842,10 @@ SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="09fb", ATTRS{idP
 Als je de melding \lstinline|S102: Synchronous Port and Asynchronous Port of the Same Register Should Not Be Driven by the Same Signal Source|
 krijgt, heb je waarschijnlijk een asynchrone \'{e}n synchrone reset in je
 ontwerp gebruikt. Zoek alle deelontwerpen af naar deze twee vormen en verander
-alle synchrone resets in asynchrone resets. Zie
-\url{http://quartushelp.altera.com/13.0/mergedProjects/verify/da/comp_file_rules_synch_reset.htm}
-en klik op de \textsl{buttons} om de schema's te openen.
+alle synchrone resets in asynchrone resets.
+% Zie
+%\url{http://quartushelp.altera.com/13.0/mergedProjects/verify/da/comp_file_rules_synch_reset.htm}
+%en klik op de \textsl{buttons} om de schema's te openen.
 
 \section{Naamgeving bestanden en entity's}
 Een \textsl{entity} is een hardware-eenheid en levert bij synthese
@@ -1866,9 +1883,9 @@ Zie onderstaand stukje code.
 \begin{lstlisting}[language=tclfix,numbers=none,belowskip=-3.5ex]
 # This file is named 'tb_entityname.do'
 ...
-vcom entityname.vhd      # file containing design entity 'entityname'
-vcom tb_entityname.vhd   # file containing testbench entity 'tb_entityname'
-vsim tb_entityname       # Simulator top level is 'tb_entityname'
+vcom entityname.vhd     # file containing design entity 'entityname'
+vcom tb_entityname.vhd  # file containing testbench entity 'tb_entityname'
+vsim tb_entityname      # Simulator top level is 'tb_entityname'
 ...
 \end{lstlisting}
 
