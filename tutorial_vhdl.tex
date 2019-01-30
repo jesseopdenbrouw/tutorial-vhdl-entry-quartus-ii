@@ -35,7 +35,7 @@
 
 %% User's stuff
 \def\tutauthor{J.E.J. op den Brouw}
-\def\tuttitle{Tutorial VHDL met\\ Quartus 11.1\\ en\\ ModelSim-Altera 10.0}
+\def\tuttitle{Tutorial VHDL met\\ Quartus 13.0sp1\\ en\\ ModelSim-Altera 10.1d}
 \def\tutpicscale{0.455}
 \def\tutvak{DIGSE1}
 \def\tutkortnaam{Tutorial VHDL Entry}
@@ -97,12 +97,12 @@
 %% The L Modern Font
 %\usepackage{lmodern}
 %% Sort of Times New Roman
-%\usepackage{charter}
-\usepackage{mathptmx}
+\usepackage[charter]{mathdesign}
+%\usepackage{mathptmx}
 \usepackage{textcomp} 
 
 %% Set paragraph skips et al.
-\usepackage[parfill]{parskip}
+\usepackage[parfill]{parskip}[=v1]
 
 %% Footnotes at the bottom of the page
 % http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/footmisc/footmisc.pdf
@@ -203,7 +203,7 @@
     {\fontfamily{phv}\fontsize{35pt}{60pt}\selectfont\bfseries\scshape \@title\par}%
     \vskip 8.0cm
     \begin{minipage}[c]{.50\linewidth}
-       \includegraphics[width=\linewidth]{HHS_grijs_groen_fc}
+       \includegraphics[width=\linewidth]{HHS_NL_groen_FC}
     \end{minipage}\hfill
     \begin{minipage}[c]{0.40\linewidth}
        {\hfill \large \@author\par}%
@@ -318,6 +318,7 @@ morecomment=[l]\# % <= this one ! Much simpler
   	\vhEntry{1.7}{02-06-2015}{JodB}{added ``instance not bound'' tips and tricks... \newline changed HHS logo to PDF version}
   	\vhEntry{1.8}{23-03-2016}{JodB}{added commands to delete \lstinline|db|, \lstinline|incremental_db|, \lstinline|simulation| and \lstinline|output_files| to the remove-script\newline reordered some sections in Tips \& Tricks\newline modified block diagram DE0 Board}
   	\vhEntry{1.81}{05-02-2018}{JodB}{changed modelsim executable path}
+	\vhEntry{1.82}{30-01-2019}{JodB}{changed logo, parskip set to v1}
 \end{versionhistory}
 
 
@@ -509,16 +510,16 @@ worden op
 De software draait op Windows\texttrademark\ \'{e}n Linux\texttrademark\ , er
 is geen OS X-versie. Op het practicum wordt Windows gebruikt.
 
-Let erop dat het practicum wordt uitgevoerd met versie 11.1sp1 resp\@. versie
-10.0c.
+Let erop dat het practicum wordt uitgevoerd met versie 13.0sp1 resp\@. versie
+10.1d.
 
 Noot: aangeraden wordt om versie 13.0sp1 te installeren. Hogere versies
 ondersteunen de FPGA's (Cyclone II en III) op de gebruikte ontwikkelbordjes
 niet. Versie 13.0sp1 is prima geschikt om deze tutorial te doorlopen. Let er
-op dat de pictogrammen kunnen afwijken t.o.v.\@ versie 11.1sp1. De in
+op dat de pictogrammen kunnen afwijken t.o.v.\@ oudere projecten. De in
 het practicum gemaakte Quartus-projecten
 kunnen zonder problemen door zowel versie 13.0sp1 als 11.1sp1 geopend worden.
-Vanaf versie 13.0 is ModelSim ge\"{\i}ntegreerd in het installatiepakket.
+ModelSim is ge\"{\i}ntegreerd in het installatiepakket.
 
 %\textbf{
 %Let op: versie 14.0 en hoger kunnen niet gebruikt worden i.s.m.\@ het
@@ -620,9 +621,7 @@ wordt verder niet besproken.
 
 \section{Altera Cyclone III}
 \label{sec:alteracycloneiii}
-De Cyclone III FPGA (Field Programmable Gate Array)\footnote{Het is wel raar
-dat een FPGA configureerbaar heet, terwijl de naam suggereert dat ze
-programmeerbaar zijn.} is opgebouwd uit zogenaamde logische elementen (Logic
+De Cyclone III FPGA (Field Programmable Gate Array) is opgebouwd uit zogenaamde logische elementen (Logic
 Elements, LE). Met deze elementen kan je een digitale schakeling bouwen. Het 
 gebruikte type heeft er 15408 aan boord. Om een indruk te geven wat dat
 inhoudt: een volledige 32-bits processor (NIOS/II) gebruikt zo'n 1800
@@ -1091,7 +1090,7 @@ ervoor dat de simulator zal stoppen.
 
 Maak een nieuw broncodebestand aan via het menu \menu{File\pijl{}New} en kies
 \naam{VHDL File} (zie de figuren~\ref{fig:040createnewfile} en
-\ref{fig:041newfiledialog}).Er wordt nu een leeg scherm geopend. Vul hier de
+\ref{fig:041newfiledialog}). Er wordt nu een leeg scherm geopend. Vul hier de
 testbenchcode uit listing~\ref{cod:vhdltestbench} op
 pagina~\pageref{cod:vhdltestbench} in. Geef het bestand de naam
 \naam{tb\_tut\_minmax.vhd} en sla het op. Zie figuur~\ref{fig:062savefile}.
